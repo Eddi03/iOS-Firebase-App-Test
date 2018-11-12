@@ -26,6 +26,7 @@ class NetworkManager: NSObject {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             // ...
             guard let user = authResult?.user else {
+                UIApplication.topViewController()?.present(GeneralUtils.share.alertError(title: "Error", message: error?.localizedDescription), animated: true, completion: nil)
                 completion(false)
                 return
             }
@@ -37,6 +38,7 @@ class NetworkManager: NSObject {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
             // ...
             guard let user = user else {
+                UIApplication.topViewController()?.present(GeneralUtils.share.alertError(title: "Error", message: error?.localizedDescription), animated: true, completion: nil)
                 completion(false)
                 return
             }
